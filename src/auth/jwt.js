@@ -1,4 +1,5 @@
 import jwt from 'koa-jwt'
+import jsonwebtoken from 'jsonwebtoken'
 
 const SECRET = "$UPER$3CRET"
 const jwtInstance = jwt({ secret: SECRET })
@@ -18,3 +19,6 @@ function JWTErrorHandler(ctx, next) {
 
 module.exports.jwt = () => jwtInstance
 module.exports.errorHandler = () => JWTErrorHandler
+module.exports.issueJwtToken = (payload) => {
+    return jsonwebtoken.sign(payload, SECRET)
+}
