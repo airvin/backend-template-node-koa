@@ -8,7 +8,7 @@
     "clean": "rm -rf ./dist",
     "dev-server": "babel-node ./src/app",
     "prod-server": "npm run clean && npm run build &&node ./dist/app",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/test.js --require @babel/register",
     "watch": "nodemon"
   },
   "author": "Allison Irvin",
@@ -28,6 +28,9 @@
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.19.1"
   }
 }

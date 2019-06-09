@@ -1,7 +1,8 @@
 {
     "exec": "npm run dev-server",
     "watch": [
-        "src/*"
+        "src/*",
+        "test/*"
     ],
     "ext": "js, html, css, json"
 }
