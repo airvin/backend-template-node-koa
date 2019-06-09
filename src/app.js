@@ -1,11 +1,9 @@
 'use strict';
 import Koa from 'koa'
-import KoaRouter from 'koa-router'
 import koaBodyparser from 'koa-bodyparser'
 import koaLogger from 'koa-logger'
-import koaStatic from 'koa-static'
 import mongoose from 'mongoose'
-import indexRouter from './routes/index'
+import { router, securedRouter } from './routes/index'
 
 // Get port from environment or set to default
 var port = process.env.PORT || '3000'
@@ -35,6 +33,7 @@ const app = new Koa()
 app.use(koaBodyparser())
 app.use(koaLogger())
 
-app.use(indexRouter.routes(), indexRouter.allowedMethods())
+app.use(router.routes(), router.allowedMethods())
+app.use(securedRouter.routes(), securedRouter.allowedMethods())
 
 app.listen(port, () => console.log(`Listening on port ${port}`))

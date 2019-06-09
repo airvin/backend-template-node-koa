@@ -1,15 +1,23 @@
 import KoaRouter from 'koa-router'
+import koaJwt from 'koa-jwt'
+import jwt from '../auth/jwt'
 
-const router = new KoaRouter()
+export const router = new KoaRouter()
+export const securedRouter = new KoaRouter()
+
+securedRouter.use(jwt.errorHandler()).use(jwt.jwt())
 
 router.get('/', async (ctx) => {
     let name = ctx.request.query.name || "World"
     ctx.body = { message: `Hello ${name}!` }
 })
 
-router.post("/", async (ctx) => {
-    let name = ctx.request.body.name || "World"
+securedRouter.get('/hello', async (ctx) => {
+    let name = ctx.request.query.name || "World"
     ctx.body = { message: `Hello ${name}!` }
 })
 
-export default router
+securedRouter.post("/", async (ctx) => {
+    let name = ctx.request.body.name || "World"
+    ctx.body = { message: `Hello ${name}!` }
+})
