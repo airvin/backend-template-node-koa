@@ -19,7 +19,8 @@ mongo(app)
 app.use(koaBodyparser())
 app.use(koaLogger())
 
-app.use(router.routes(), router.allowedMethods())
-app.use(securedRouter.routes(), securedRouter.allowedMethods())
+// set up routes
+router(app)
+securedRouter(app)
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
