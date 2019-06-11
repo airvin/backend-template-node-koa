@@ -1,4 +1,4 @@
-# Node.js backend template with Koa and Express
+# Node.js backend template with Koa and MongoDB
 
 ## Dependencies
 
