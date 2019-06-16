@@ -1,7 +1,10 @@
 import jwt from 'koa-jwt'
 import jsonwebtoken from 'jsonwebtoken'
+import dotenv from 'dotenv'
 
-const SECRET = "$UPER$3CRET"
+dotenv.config()
+
+const SECRET = process.env.SECRET
 const jwtInstance = jwt({ secret: SECRET })
 
 function JWTErrorHandler(ctx, next) {

@@ -64,4 +64,26 @@ describe("POST at /register", () => {
             }
         })
     })
+
+    describe("GET at /confidential", () => {
+        it("should return 401 when not logged in", async () => {
+            try {
+                const response = await axios.get(`${URL}/confidential`)
+                expect(response.status).to.be.equal("Should have thrown error")
+            } catch (err) {
+                expect(err.response.status).to.be.equal(401)
+            }
+        })
+    })
+
+    describe("POST at /confidential", () => {
+        it("should return 401 when not logged in", async () => {
+            try {
+                const response = await axios.post(`${URL}/confidential`, {})
+                expect(response.status).to.be.equal("Should have thrown error")
+            } catch (err) {
+                expect(err.response.status).to.be.equal(401)
+            }
+        })
+    })
 })

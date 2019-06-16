@@ -1,6 +1,7 @@
 import KoaRouter from 'koa-router'
 import koaJwt from 'koa-jwt'
 import jwt from '../auth/jwt'
+import passport from 'koa-passport'
 
 // unsecured router
 export const router = async (app) => {
@@ -40,13 +41,11 @@ export const router = async (app) => {
         let email = ctx.request.body.email
         let hash = ctx.request.body.hash
         const dbUser = await app.users.find({ "email": email }).toArray()
-        console.log(dbUser[0].hash)
-        console.log(hash)
         if (dbUser[0] && dbUser[0].hash === hash) {
             ctx.body = {
                 token: jwt.issueJwtToken({
-                    user: "user",
-                    role: "admin"
+                    email: email,
+                    role: "member"
                 })
             }
         } else {
@@ -64,12 +63,12 @@ export const securedRouter = (app) => {
 
     securedRouter.use(jwt.errorHandler()).use(jwt.jwt())
 
-    securedRouter.get('/hello', async (ctx) => {
+    securedRouter.get('/confidential', async (ctx) => {
         let name = ctx.request.query.name || "World"
         ctx.body = { message: `Hello ${name}!` }
     })
 
-    securedRouter.post("/", async (ctx) => {
+    securedRouter.post("/confidential", async (ctx) => {
         let name = ctx.request.body.name || "World"
         ctx.body = { message: `Hello ${name}!` }
     })
